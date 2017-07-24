@@ -67,7 +67,8 @@ a {
   /*position: relative;*/
   box-sizing: border-box;
   width: 100%;
-  height: 1000px;
+  min-height: calc(100vh - 80px);
+  // height: 1000px;
   /*margin-top: 40px;*/
 }
 

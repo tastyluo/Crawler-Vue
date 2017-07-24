@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-item">
+  <div class="goods-item" @click="toSite">
     <div class="g-img">
       <img width="180" height="180" :src="goodsImg" />
     </div>
@@ -15,7 +15,7 @@
     <div class="g-comment">
       <span v-if="isSelfOperated" class="g-jdzy">自营</span>
       <span class="g-goodrate">{{goodRate}}%好评</span>
-      <span class="g-goodrate">{{commentsNum}}条评价</span>
+      <span class="g-goodrate">{{parseCommentsNum}}评价</span>
     </div>
   </div>
 </template>
@@ -42,6 +42,10 @@
         type: Number,
         default: null
       },
+      commentsNum: {
+        type: Number,
+        default: null
+      },
       selfOperated: {
         type: String,
         default: '0'
@@ -63,6 +67,13 @@
         } else if (this.selfOperated === '1') {
           return true
         }
+      },
+      parseCommentsNum () {
+        let parseNum = this.commentsNum
+        if (this.commentsNum > 10000) {
+          parseNum = parseInt(this.commentsNum / 10000) + '万+'
+        }
+        return parseNum
       }
     }
   }
@@ -76,7 +87,7 @@
   .goods-item {
     width: 180px;
     height: 250px;
-    margin: 20px;
+    margin: 10px 20px;
     padding-left: 5px;
     padding-right: 5px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, .2), 0 2px 2px rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .12);

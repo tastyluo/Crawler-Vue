@@ -1,7 +1,7 @@
 <template>
   <div class="goods">
     <div class="g-list">
-      <goods-item v-for="item in itemList" :key="item.id" v-bind="item">
+      <goods-item v-for="item in goodsList" :key="item.id" v-bind="item">
       </goods-item>
     </div>
     <div class="g-pagination">
@@ -11,7 +11,7 @@
       :current-page="pageNum" 
       :page-sizes="[20, 40, 80, 100]" 
       :page-size="pageSize" 
-      layout="total, sizes, prev, pager, next, jumper" 
+      layout="->, total, sizes, prev, pager, next, jumper"
       :total="total">
       </el-pagination>
     </div>
@@ -24,19 +24,27 @@
     data () {
       return {
         pageSize: 20,
-        pageNum: 1
-      }
-    },
-    computed: {
-      itemList () {
-        return this.$store.state.goodsList
-      },
-      total () {
-        return this.$store.state.total
+        pageNum: 1,
+        url: '/api/jdGoods/page',
+        pageData: null
       }
     },
     created () {
       this.updateData()
+    },
+    computed: {
+      goodsList () {
+        if (this.pageData != null) {
+          return this.pageData.list
+        }
+        return null
+      },
+      total () {
+        if (this.pageData != null) {
+          return this.pageData.total
+        }
+        return null
+      }
     },
     methods: {
       onCurrentChange (val) {
@@ -48,9 +56,18 @@
         this.updateData()
       },
       updateData () {
-        this.$store.dispatch('getJdGoods', {
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
+        let me = this
+        this.$http.get(this.url, {
+          params: {
+            pageNum: this.pageNum,
+            pageSize: this.pageSize
+          }
+        })
+        .then(function (response) {
+          me.pageData = response.data
+        })
+        .catch(function (error) {
+          console.log(error)
         })
       }
     },
@@ -61,10 +78,11 @@
 <style lang="scss" scoped>
   .g-list {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     align-content: flex-start;
   }
+
 
 </style>
 
