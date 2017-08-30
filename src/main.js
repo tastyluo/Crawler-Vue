@@ -8,7 +8,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import 'vue-awesome/icons'
-import axios from 'axios'
+import axios from './config/http'
 import Icon from 'vue-awesome/components/Icon'
 
 Vue.config.productionTip = false
@@ -19,9 +19,9 @@ Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App }
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App }
 })
