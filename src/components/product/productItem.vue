@@ -1,31 +1,35 @@
 <template>
-    <div class="goods-item">
-        <div class="g-img">
-            <img width="180" height="180" :src="goodsImg" />
+    <div class="product-item" @click="toProductDetail">
+        <div class="p-img">
+            <img width="180" height="180" :src="imgUrl" />
         </div>
-        <div class="g-name">
+        <div class="p-name">
             <span>{{name}}</span>
         </div>
-        <div class="g-pgr">
-            <strong class="g-price">
+        <div class="p-pgr">
+            <strong class="p-price">
                 <em>¥</em>
                 <i>{{price}}</i>
             </strong>
         </div>
         <div class="g-comment">
-            <span v-if="isSelfOperated" class="g-jdzy">自营</span>
-            <span class="g-goodrate">{{goodRate}}%好评</span>
-            <span class="g-goodrate">{{parseCommentsNum}}评价</span>
+            <span v-if="isSelfOperated" class="p-jdzy">自营</span>
+            <span class="p-goodrate">{{goodRate}}%好评</span>
+            <span class="p-goodrate">{{parseCommentsNum}}评价</span>
         </div>
     </div>
 </template>
 
 <script>
 
-    import cpuImg from '@/assets/cpu.jpg'
+    const imgUrlHeader = 'http://localhost:1024/'
 
     export default {
         props: {
+            goodsId: {
+                type: String,
+                default: ''
+            },
             name: {
                 type: String,
                 default: ''
@@ -55,12 +59,10 @@
                 default: ''
             }
         },
-        data () {
-            return {
-                goodsImg: cpuImg
-            }
-        },
         computed: {
+            imgUrl () {
+                return `${imgUrlHeader}${this.goodsId}.jpg`
+            },
             isSelfOperated () {
                 if (this.selfOperated === '0') {
                     return false
@@ -75,6 +77,11 @@
                 }
                 return parseNum
             }
+        },
+        methods: {
+            toProductDetail () {
+                window.open(this.link, '_blank')
+            }
         }
     }
 </script>
@@ -85,7 +92,7 @@
         font-weight: 500;
     }
 
-    .goods-item {
+    .product-item {
         width: 180px;
         height: 250px;
         margin: 10px 20px;
@@ -100,13 +107,13 @@
         }
     }
 
-    .g-name {
+    .p-name {
         font-size: 12px;
         white-space: nowrap;
         overflow: hidden;
     }
 
-    .g-goodrate {
+    .p-goodrate {
         color: #A7A7B6;
         font-size: 12px;
         float: right;
@@ -115,12 +122,12 @@
         margin-left: 10px;
     }
 
-    .g-price {
+    .p-price {
         color: #E4393C;
         font-size: 16px;
     }
 
-    .g-jdzy {
+    .p-jdzy {
         background-color: #e4393c;
         color: #fff;
         font-size: 13px;

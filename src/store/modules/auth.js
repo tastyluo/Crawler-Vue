@@ -16,7 +16,7 @@ const mutations = {
         state.status = payload.status
         if (payload.status === 1100) {
             setTimeout(() => {
-                router.push({ path: '/index/goods' })
+                router.push({ path: '/index/products' })
             }, 1000)
         }
     },

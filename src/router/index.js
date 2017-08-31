@@ -31,7 +31,7 @@ const router = new Router({
             component: index,
             children: [
                 {
-                    path: 'goods',
+                    path: 'products',
                     component: products
                 }
             ]

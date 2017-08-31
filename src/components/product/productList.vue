@@ -1,18 +1,21 @@
 <template>
-    <div class="goods">
-        <div class="g-list">
-            <product-item v-for="item in goodsList" :key="item.id" v-bind="item">
-            </product-item>
-        </div>
-        <div class="g-pagination">
+    <div class="products">
+        <ul class="product-list">
+            <li v-for="item in productList" :key="item.id" >
+                <product-item v-bind="item">
+                </product-item>
+            </li>
+        </ul>
+        <div class="p-pagination-wrapper">
             <el-pagination 
-            @size-change="onSizeChange" 
-            @current-change="onCurrentChange" 
-            :current-page="pageNum" 
-            :page-sizes="[20, 40, 80, 100]" 
-            :page-size="pageSize" 
-            layout="->, total, sizes, prev, pager, next, jumper" 
-            :total="total">
+                class="p-pagination"
+                @size-change="onSizeChange" 
+                @current-change="onCurrentChange" 
+                :current-page="pageNum" 
+                :page-sizes="[20, 40, 80, 100]" 
+                :page-size="pageSize" 
+                layout="->, total, sizes, prev, pager, next, jumper" 
+                :total="total">
             </el-pagination>
         </div>
     </div>
@@ -33,7 +36,7 @@
             this.updateData()
         },
         computed: {
-            goodsList () {
+            productList () {
                 if (this.pageData != null) {
                     return this.pageData.list
                 }
@@ -76,11 +79,26 @@
 </script>
 
 <style lang="scss" scoped>
-    .g-list {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        align-content: flex-start;
+.products {
+    width: 1610px;
+    margin: 10px auto;
+    .product-list {
+        // display: flex;
+        // justify-content: flex-start;
+        // flex-wrap: wrap;
+        // align-content: flex-start;
+        // align-items: center;
+        list-style: none;
+        >li {
+            float: left;
+        }
     }
+    .p-pagination-wrapper {
+        display: inline-block;
+        float: right;
+        margin-top: 20px;
+    }
+}
+    
 </style>
 
