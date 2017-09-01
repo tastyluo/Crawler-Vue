@@ -53,8 +53,7 @@ router.beforeEach((to, from, next) => {
     } else {
         if (!store.state.auth.token) {
             next({
-                path: '/login',
-                query: { redirect: to.fullPath }
+                path: '/login'
             })
         } else {
             next()

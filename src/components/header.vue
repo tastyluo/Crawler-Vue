@@ -17,12 +17,35 @@
                     </li>
                 </ul>
             </div>
+            <div classs="login-user">
+                <span v-if="username">当前登录用户： {{username}}</span>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
+        data () {
+            return {
+                username: ''
+            }
+        },
+        created () {
+            this.getUserinfo()
+        },
+        methods: {
+            getUserinfo () {
+                let me = this
+                this.$http.get('userInfo/get')
+                    .then(response => {
+                        me.username = response.data.username
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
     }
 </script>
 
@@ -84,6 +107,12 @@
             line-height: 40px;
             font-size: 22px;
             font-family: Consola;
+        }
+        .login-user {
+            float: right;
+            margin-right: 20px;
+            line-height: 40px;
+            font-size: 13px;
         }
     }
 </style>

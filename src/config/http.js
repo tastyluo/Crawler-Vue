@@ -2,7 +2,7 @@
  * @Author: Luo jiaxing
  * @Date: 2017-08-23 16:05:28
  * @Last Modified by: Luo jiaxing
- * @Last Modified time: 2017-08-30 17:49:52
+ * @Last Modified time: 2017-09-01 09:29:48
  * Axios 配置
  */
 import axios from 'axios'
@@ -39,8 +39,7 @@ axios.interceptors.response.use(
                 // 401 清除token信息并跳转到登录页面
                 store.commit(types.LOGOUT)
                 router.replace({
-                    path: '/login',
-                    query: { redirect: router.currentRoute.fullPath }
+                    path: '/login'
                 })
             }
         }

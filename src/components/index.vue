@@ -24,7 +24,7 @@
 
         <!-- 我来组成尾部 😊-->
         <footer class="app-footer">
-            <span>Copyright © crawler webpage power by vue.js</span>
+            <span>power by vue.js (´・ω・`)</span>
         </footer>
     </div>
 </template>
@@ -55,14 +55,15 @@
     }
 
     .app-footer {
-        margin-top: 20px;
+        margin-top: 50px;
         width: 100%;
-        height: 20px;
+        height: 30px;
         background-color: #2e476d;
         text-align: center;
         span {
             font-size: 14px;
-            color: #96a8c3;
+            line-height: 30px;
+            color: #f0f0f0;
         }
     }
 </style>

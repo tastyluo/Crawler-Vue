@@ -5,6 +5,7 @@
                 <product-item v-bind="item">
                 </product-item>
             </li>
+            <div style="clear:both;"></div>
         </ul>
         <div class="p-pagination-wrapper">
             <el-pagination 
@@ -80,7 +81,7 @@
 
 <style lang="scss" scoped>
 .products {
-    width: 1610px;
+    width: 1150px;
     margin: 10px auto;
     .product-list {
         // display: flex;
@@ -94,8 +95,6 @@
         }
     }
     .p-pagination-wrapper {
-        display: inline-block;
-        float: right;
         margin-top: 20px;
     }
 }
